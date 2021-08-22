@@ -17,6 +17,7 @@ struct MapBoard
         OCCUPIED_GREEN = '~';
     const static int MAP_SIZE = 16;
     char map[MAP_SIZE][MAP_SIZE];
+    std::vector<std::string> crap;
 
     MapBoard() {
         for (int i=0; i<MAP_SIZE; ++i)
@@ -56,7 +57,7 @@ std::istream& operator >> (std::istream& cin, MapBoard& m) {
         std::getline(cin, str, '\n');
         if (cin.eof()) break;
         if (str[0]=='#') {
-
+            m.crap.push_back(str);
         }
         else {
             for (int i=0; i<MapBoard::MAP_SIZE; ++i)
@@ -68,7 +69,13 @@ std::istream& operator >> (std::istream& cin, MapBoard& m) {
 }
 
 std::ostream& operator << (std::ostream& cout, const MapBoard& m) {
-    cout<<"#data#\n";
+    if (!m.crap.empty()) {
+        for (std::string str : m.crap)
+            cout<<str<<"\n";
+    }
+    else {
+        cout<<"#data#\n";
+    }
     for (int i=0; i<MapBoard::MAP_SIZE; ++i) {
         for (int j=0; j<MapBoard::MAP_SIZE; ++j)
             cout<<m.map[i][j];
