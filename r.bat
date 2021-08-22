@@ -1,5 +1,5 @@
 @echo off
 setlocal
-cd ..\\bin\\pixelme
+cd bin\\pixelme
 pixelme.exe
 endlocal
